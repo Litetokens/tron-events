@@ -10,6 +10,9 @@ const events = require('../fixtures/events')
 
 describe('db', function () {
 
+
+  return
+
   let db
   const tx0 = txs[0]
 
@@ -17,9 +20,9 @@ describe('db', function () {
 
     process.env.cacheDuration = 2
 
-    db = require('../../src/db')
-    await db.initPg()
-    await db.pg.query('truncate events_log')
+    // db = require('../../src/db')
+    // await db.initPg()
+    // await db.pg.query('truncate events_log')
 
   })
 
@@ -100,7 +103,7 @@ describe('db', function () {
       promises = []
       d = Date.now()
       for (let i = 0; i < events.length; i++) {
-        promises.push(db.getEventByTxIDFromCache(events[i].transaction_id))
+        promises.push(db.getEventByTransactionID(events[i].transaction_id))
         // console.log(result)
       }
       await Promise.all(promises)
@@ -139,7 +142,7 @@ describe('db', function () {
       promises = []
       d = Date.now()
       for (let i = 0; i < events.length; i++) {
-        promises.push(db.getEventByTxIDFromCache(events[i].transaction_id), true)
+        promises.push(db.getEventByTransactionID(events[i].transaction_id), true)
         // console.log(result)
       }
       await Promise.all(promises)
