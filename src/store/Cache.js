@@ -163,7 +163,7 @@ class Cache {
   ) {
 
     const result = await this.setEventByTransactionID(eventData, compressed, forceAsConfirmed, cacheDuration)
-    if (result === returnCodes.SET_UNCONFIRMED || results === returnCodes.SET_FORCED_CONFIRMED) {
+    if (result === returnCodes.SET_UNCONFIRMED || result === returnCodes.SET_FORCED_CONFIRMED) {
       this.setIndexByContractAddress(eventData)
       this.setTimestampByBlockNumber(eventData)
     }

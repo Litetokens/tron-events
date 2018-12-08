@@ -18,10 +18,7 @@ const events = require('../../fixtures/events')
 describe('#cache', function () {
 
   async function resetRedis() {
-    let keys = await cache.redis.keysAsync('*')
-    for (let key of keys) {
-      await cache.redis.expireAsync(key, 0)
-    }
+    await cache.redis.flushallAsync()
   }
 
   const tx0 = txs[0]
@@ -31,7 +28,8 @@ describe('#cache', function () {
   })
 
   after(async function () {
-    // await resetRedis()
+    this.timeout(30000)
+    await resetRedis()
   })
 
 
@@ -264,6 +262,7 @@ describe('#cache', function () {
     describe('#getEventsByContractAddress', function () {
 
       beforeEach(async function () {
+        this.timeout(10000)
         await resetRedis()
       })
 
@@ -287,6 +286,28 @@ describe('#cache', function () {
           assert.equal(events.length, contractAddresses[contractAddress] < 20 ? contractAddresses[contractAddress] : 20)
         }
       })
+
+      // it('should get a list of events by contract address, size = 5, page 1, 2, 3...', async function () {
+      //
+      //   let contractAddresses = {}
+      //   let indexByTransactionID = {}
+      //
+      //   for (let i = 0; i < events.length; i++) {
+      //     const tx = events[i]
+      //     if (!contractAddresses[tx.contract_address]) {
+      //       contractAddresses[tx.contract_address] = 0
+      //     }
+      //     contractAddresses[tx.contract_address]++
+      //     indexByTransactionID[tx.transaction_id] = i
+      //     await cache.setEvent(tx)
+      //   }
+      //
+      //   for (let contractAddress in contractAddresses) {
+      //     const events = await cache.getEventsByContractAddress(contractAddress)
+      //     assert.equal(events.length, contractAddresses[contractAddress] < 20 ? contractAddresses[contractAddress] : 20)
+      //   }
+      //
+      // })
     })
 
   })

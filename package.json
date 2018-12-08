@@ -6,6 +6,7 @@
   "repository": "https://github.com/tronprotocol/tron-events",
   "scripts": {
     "test": "bin/test.sh",
+    "stress-test": "node test/stress",
     "start": "node ."
   },
   "author": {
