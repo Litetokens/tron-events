@@ -96,8 +96,8 @@
 //
 //       await cache.setEventByTransactionID(tx0, true)
 //
-//       const key = cache.formatKey(tx0, cache.fieldsByTransactionID.key)
-//       const subKey = cache.formatKey(tx0, cache.fieldsByTransactionID.subKey)
+//       const key = cache.formatKey(tx0, ['transaction_id'])
+//       const subKey = cache.formatKey(tx0, ['event_name', 'event_index'])
 //
 //       const ttl = await cache.redis.ttlAsync(key)
 //       assert.equal(ttl, process.env.cacheDuration)
@@ -122,7 +122,7 @@
 //
 //       await cache.setEventByTransactionID(tx1, true)
 //
-//       const key = cache.formatKey(tx0, cache.fieldsByTransactionID.key)
+//       const key = cache.formatKey(tx0, ['transaction_id'])
 //
 //       let data = await cache.redis.hgetallAsync(key)
 //       assert.equal(typeof data, 'object')
@@ -138,7 +138,7 @@
 //       let tx4 = _.clone(txs[4])
 //       tx4.transaction_id = tx2.transaction_id
 //
-//       const key = cache.formatKey(tx2, cache.fieldsByTransactionID.key)
+//       const key = cache.formatKey(tx2, ['transaction_id'])
 //
 //       await cache.setEventByTransactionID(tx2)
 //       await cache.setEventByTransactionID(tx4)
@@ -155,13 +155,13 @@
 //   })
 //
 //
-//   describe('#setEventByContractAddress', function () {
+//   describe('#setIndexByContractAddress', function () {
 //
 //     it('should cache an event by contract address', async function () {
 //
 //       const tx5 = txs[5]
 //
-//       await cache.setEventByContractAddress(tx5)
+//       await cache.setIndexByContractAddress(tx5)
 //
 //       const key = cache.formatKey(tx5, cache.fieldsByContractAddress.key)
 //       const subKey = cache.formatKey(tx5, cache.fieldsByContractAddress.subKey)

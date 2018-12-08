@@ -247,7 +247,7 @@ const _ = require('lodash')
 //
 //   }
 //
-//   async setEventByContractAddress(eventData, hash, compressed) {
+//   async setIndexByContractAddress(eventData, hash, compressed) {
 //
 //     const key = this.formatKey(eventData, this.byContractAddress.key)
 //     const subKey = this.formatKey(eventData, this.byContractAddress.subKey)
@@ -262,7 +262,7 @@ const _ = require('lodash')
 //     const hash = this.hashEvent(eventData)
 //
 //     const returnCode0 = await this.setEventByTransactionID(eventData, options.compressed)
-//     const returnCode = await this.setEventByContractAddress(eventData, hash, options.compressed)
+//     const returnCode = await this.setIndexByContractAddress(eventData, hash, options.compressed)
 //
 //     if (returnCode0 !== returnCode) {
 //       // TODO Should we alert some way?
@@ -354,13 +354,13 @@ const _ = require('lodash')
 //     return events
 //   }
 //
-//   async getEventByContractAddress(address, since, blockNumber, eventName, size = 20, page = 1, previousLast, onlyConfirmed, isCompressed) {
+//   async getEventByContractAddress(address, since, blockNumber, eventName, size = 20, page = 1, previousScore, onlyConfirmed, isCompressed) {
 //
 //     let keys = await this.redis.keys(`${address}:${blockNumber || '*' }:${eventName || '*'}`)
 //     keys.sort(this.sortKeysByBlockNumberDescent)
 //     const result = []
 //     let count = -1
-//     let nextLast = previousLast
+//     let nextLast = previousScore
 //     let started = false
 //     for (let i = 0; i < key.length; i++) {
 //       let events = this.filterEventsByConfirmation(
@@ -371,9 +371,9 @@ const _ = require('lodash')
 //         count++
 //         let event = events[eventIndex]
 //         if (!started) {
-//           if (!previousLast) {
+//           if (!previousScore) {
 //             started = true
-//           } else if (previousLast === event.h) {
+//           } else if (previousScore === event.h) {
 //             started = true
 //             continue
 //           } else {

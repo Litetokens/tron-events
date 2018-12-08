@@ -15,7 +15,7 @@ class Store {
     const hash = this.hashEvent(eventData)
 
     const returnCode0 = await this.setEventByTransactionID(eventData, options.compressed)
-    const returnCode = await this.setEventByContractAddress(eventData, hash, options.compressed)
+    const returnCode = await this.setIndexByContractAddress(eventData, hash, options.compressed)
 
     if (returnCode0 !== returnCode) {
       // TODO Should we alert some way?

@@ -1,7 +1,7 @@
 {
-  "name": "tron-events",
+  "name": "TronEvents",
   "version": "0.0.1",
-  "description": "An Infura for Tron",
+  "description": "An event server for TronGrid",
   "main": "index.js",
   "repository": "https://github.com/tronprotocol/tron-events",
   "scripts": {
@@ -23,7 +23,6 @@
     "express-pino-logger": "^4.0.0",
     "js-sha3": "^0.8.0",
     "lodash": "^4.17.11",
-    "morgan": "^1.9.1",
     "pg": "^7.6.1",
     "pino": "^5.9.0",
     "redis": "^2.8.0"
